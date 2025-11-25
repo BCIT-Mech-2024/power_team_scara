@@ -2,4 +2,6 @@
 *.swo
 
 Build/
-Debug
+Debug/
+.vs/
+x86/
