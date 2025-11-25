@@ -54,7 +54,7 @@ void main(void){
 	//		Look for a device call "USB Serial Port".
 	//		Changed the initialization function call from "initializeSCARA("142.232.112.183")" to
 	//		"initializeSCARA("COM4")"
-	if (!initializeSCARA("142.232.112.173")) {
+	if (!initializeSCARA("141.232.112.209")) {
 		exit(0);
 	}
 
