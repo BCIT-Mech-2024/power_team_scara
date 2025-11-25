@@ -37,14 +37,14 @@
 #define LEFT 	1
 #define RIGHT 	0
 
-#define JOINT1_RESOLUTION	0.0			// Pulses/Degree
-#define JOINT2_RESOLUTION	0.0			// Pulses/Degree
+#define JOINT1_RESOLUTION	800.0			// Pulses/Degree
+#define JOINT2_RESOLUTION	800.0			// Pulses/Degree
 
-#define JOINT1_LENGTH		0.0			// Inches
-#define JOINT2_LENGTH		0.0			// Inches
+#define JOINT1_LENGTH		10.0			// Inches
+#define JOINT2_LENGTH		10.0			// Inches
 
-#define JOINT1_MAX			0				// Degrees (from Horizontal)
-#define JOINT2_MAX			0				// Degrees (from Joint 1)
+#define JOINT1_MAX			95				// Degrees (from Horizontal)
+#define JOINT2_MAX			150				// Degrees (from Joint 1)
 
 
 /*|Enumerations|---------------------------------------------------------------*/
