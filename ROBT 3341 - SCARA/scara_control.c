@@ -156,7 +156,17 @@ void moveRobot(void) {
 # Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void forwardKinematics(double joint1, double joint2, double* x, double* y) {
-
+	double joint1_Radians = (joint1*180)/M_PI;
+	double joint2_Radians = (joint2*180)/M_PI;
+	if (((fabs(joint1)) <= JOINT1_MAX) && ((fabs(joint2)) <= JOINT2_MAX)){
+		*x = JOINT1_LENGTH * cos(joint1_Radians) + JOINT2_LENGTH * cos(joint1_Radians + joint2_Radians);
+		*y = JOINT1_LENGTH * sin (joint1_Radians) + JOINT2_LENGTH * cos(joint1_Radians + joint2_Radians);
+	}
+	else{
+		*x = 0;
+		*y = 0;
+		printf("SOMETHING WENT VERY WRONG (forwardKinematics function)");
+	}
 }
 
 
@@ -177,9 +187,48 @@ void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 # Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void inverseKinematics(double x, double y, double* joint1, double* joint2, char arm) {
+	int inRange = -1;
+ 
+	double L = sqrt((x*x) + (y*y));
+	double beta = atan2(y,x);
+	double alpha = acos(((JOINT2_LENGTH*JOINT2_LENGTH)-(L*L)-JOINT1_LENGTH*JOINT1_LENGTH)/(-2*L*JOINT1_LENGTH));
+ 
+	if(arm == LEFT){
+	   *joint1 = beta + alpha;
+	}
+	else if (arm == RIGHT){
+	   *joint1 = beta - alpha;
+	}
+	else{
+	   *joint1 = 1000; //to make it out of range cuz arm solution isnt valid
+	}
 
+	if(*joint1 < -M_PI){
+		*joint1+= 2*M_PI;
+	 }
+	 else if (*joint1 > M_PI){
+		*joint1-= 2*M_PI;
+	 }
+
+	*joint2 = atan2((y-(JOINT1_LENGTH*sin(*joint1))),(x - (JOINT1_LENGTH * cos(*joint1))))-(*joint1);
+ 
+	if(*joint2 < -M_PI){
+		*joint2+= 2*M_PI;
+	 }
+	 else if (*joint2 > M_PI){
+		*joint2-= 2*PI;
+	 }
+
+	*joint1 = (*joint1*180)/M_PI;
+	*joint2 = (*joint2*180)/PI;
+	//test command
+	//printf("/%lf,%lf/\n", fabs(*joint1), fabs(*joint2));
+ 
+	if (((fabs(*joint1)) <= MAX_ABS_THETA1_DEG) && (fabs((*joint2)) <= MAX_ABS_THETA2_DEG)){
+	   inRange = 0;
+	}
+	return inRange; 
 }
-
 
 /*|udpate|---------------------------------------------------------------------
 #
