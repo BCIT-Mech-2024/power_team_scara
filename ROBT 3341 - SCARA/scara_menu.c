@@ -1,4 +1,5 @@
 #include "scara_menu.h"
+#include <stdbool.h>
 
 extern struct BRobot robot;
 
