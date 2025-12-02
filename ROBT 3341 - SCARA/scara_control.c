@@ -110,23 +110,20 @@ void moveTCP(void) {
 # ---------------------------------------------------------------------------*/
 void limpUnlimp(void) {
 
-<<<<<<< Updated upstream
-printf("Enter a 1 to put the Scara into Limp Mode. Or any other key to proceed: \n");
-scanf("%d" &limp);
-=======
-int limp, J1, J2;
+	int limp = 0;
+	int J1 = 0;
+	int J2 = 0;
 
 	printf("Enter a 1 to put the Scara into Limp Mode. Or any other key to proceed: \n");
 	scanf("%d" &limp);
->>>>>>> Stashed changes
 
 	if(limp){
 		disableScaraMotors();
 	}else{
 		moveJoint();
 	}
-
 }
+
 /*|moveRobot|------------------------------------------------------------------
 #
 # Decription:
