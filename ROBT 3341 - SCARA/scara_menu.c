@@ -29,18 +29,11 @@ void scaraMenu(void) {
 				break;
 
 			case Joints:
-				system("CLS");
-				float jointAngle0 = 0;
-				float jointAngle1 = 0;
-				scanf("Angle 0 %d, Angle 1 %d", &jointAngle0, &jointAngle1);
-				moveJoint(); // TODO: This needs to be populated
+				moveJoint();
 				break;
 
 			case Tool:
-				float xPos = 0;
-				float yPos = 0;
-				scanf("X Position: %d, Y Position: %d", &xPos, &yPos);
-				moveTCP(); // TODO: This needs to be populated
+				moveTCP();
 				break;
 
 			case Limp:
