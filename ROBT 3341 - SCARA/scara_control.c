@@ -80,6 +80,10 @@ void displayPosition(void) {
 # ---------------------------------------------------------------------------*/
 void homeRobot(void) {
 
+// Need to move to 0,0
+
+setScaraPosition(0,0,800,800);
+
 }
 
 
@@ -118,10 +122,24 @@ void moveTCP(void) {
 # Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void limpUnlimp(void) {
-//Mine
+
+int limp, J1, J2;
+
+printf("Enter a 1 to put the Scara into Limp Mode. Or any other key to proceed: \n");
+scanf("%d" &limp);
+
+if(limp)
+{
+	disableScaraMotors();
+	return;
+}
+else
+{
+	moveJoint();
+	return;
 }
 
-
+}
 /*|moveRobot|------------------------------------------------------------------
 #
 # Decription:
@@ -135,6 +153,8 @@ void limpUnlimp(void) {
 #
 # Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
+
+
 void moveRobot(void) {
 
 }
