@@ -48,12 +48,17 @@
 
 
 /*|Enumerations|---------------------------------------------------------------*/
-typedef enum {
-	HOME = 1, DISPLAY, JOINTS, TOOL, LIMP, RESET, QUIT
-} menu;
+typedef enum MenuOption {
+	Home,
+	Display,
+	Joints,
+	Tool,
+	Limp,
+	Reset,
+	Quit,
+} MenuOption;
 
 /*|Function Declarations|------------------------------------------------------*/
-void scaraMenu(void);
 void displayPosition(void);
 void homeRobot(void);
 void moveJoint(void);

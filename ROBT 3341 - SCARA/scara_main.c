@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include "scara_interface.h"
 #include "scara_control.h"
+#include "scara_menu.h"
 #include "tic_generator.h"
 
 
@@ -68,7 +69,7 @@ void main(void){
 	scaraTestProcedure(); // Remove this line if not testing SCARA operation.
 	
 	// Full Program
-	// scaraMenu();
+	scaraMenu();
 	
 	tic_enable(0);	// Stop the timer
 	powerDownScara();
