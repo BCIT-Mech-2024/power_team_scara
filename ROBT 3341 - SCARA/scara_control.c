@@ -35,7 +35,6 @@ extern struct BRobot robot;
 # Decription:
 #	This function displays the encoder counts, joint angles, and coordinates.
 #
-# Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void displayPosition(void) {
 	printf("Display the Position");
@@ -77,12 +76,27 @@ void homeRobot(void) {
 /*|moveJoint|------------------------------------------------------------------
 #
 # Decription:
-#	This function prompts the user for a Joint 1 and Joint 2 position.
+#	This function prompts the user for a Joint 1 and Joint 2 position, then moves there
 #
-# Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void moveJoint(void) {
+	double joint1 = 0;
+	double joint2 = 0;
+	double x = 0;
+	double y = 0;
 
+	printf("Please enter the joint angles you would like to move to (theta1,theta2)");
+	scanf("%lf,%lf", &joint1, &joint2);
+
+	forwardKinematics(joint1, joint2, &x, &y);
+	setScaraPosition(
+		joint1*JOINT1_RESOLUTION, 
+		joint2*JOINT2_RESOLUTION, 
+		JOINT1_MAX_SPEED, 
+		JOINT2_MAX_SPEED
+	);
+
+	printf("Moving to X:%lf , Y:%lf\n", x, y);
 }
 
 
@@ -92,10 +106,27 @@ void moveJoint(void) {
 #	This function prompts the user for a specific x,y coordinate and left or 
 # right arm configuration.
 #
-# Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void moveTCP(void) {
+	double joint1 = 0;
+	double joint2 = 0;
+	double x = 0;
+	double y = 0;
+	char armSolution = 0;
 
+	printf("Please enter the joint angles you would like to move to (X,Y,armSolution)\
+		   \n(0 or 1 for arm solution, being left or right)");
+	scanf("%lf,%lf, %c", &x, &y, &armSolution);
+
+	inverseKinematics(x, y, &joint1, &joint2, armSolution);
+	setScaraPosition(
+		joint1*JOINT1_RESOLUTION, 
+		joint2*JOINT2_RESOLUTION, 
+		JOINT1_MAX_SPEED, 
+		JOINT2_MAX_SPEED
+	);
+
+	printf("Moving to X:%lf , Y:%lf\n", x, y);	
 }
 
 
@@ -142,7 +173,7 @@ void moveRobot(void) {
 }
 
 
-/*|setScaraPosition|-----------------------------------------------------------
+/*|forwardKinematics|-----------------------------------------------------------
 #
 # Decription:
 #	This function calculates the x,y coordinates for given joint angles.
@@ -155,7 +186,6 @@ void moveRobot(void) {
 #	x - x-coordinate in inches.
 #	y - y-coordiante in inches.
 #
-# Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 	double joint1_Radians = (joint1*180)/M_PI;
@@ -167,7 +197,7 @@ void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 	else{
 		*x = 0;
 		*y = 0;
-		printf("SOMETHING WENT VERY WRONG (forwardKinematics function)");
+		printf("SOMETHING WENT VERY WRONG (forwardKinematics function)\n");
 	}
 }
 
@@ -186,10 +216,8 @@ void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 #	joint1 - Joint 1 angle in degrees.
 #	joint2 - Joint 2 angle in degrees.
 #
-# Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void inverseKinematics(double x, double y, double* joint1, double* joint2, char arm) {
-	int inRange = -1;
  
 	double L = sqrt((x*x) + (y*y));
 	double beta = atan2(y,x);
@@ -218,18 +246,17 @@ void inverseKinematics(double x, double y, double* joint1, double* joint2, char 
 		*joint2+= 2*M_PI;
 	 }
 	 else if (*joint2 > M_PI){
-		*joint2-= 2*PI;
+		*joint2-= 2*M_PI;
 	 }
 
 	*joint1 = (*joint1*180)/M_PI;
-	*joint2 = (*joint2*180)/PI;
-	//test command
-	//printf("/%lf,%lf/\n", fabs(*joint1), fabs(*joint2));
+	*joint2 = (*joint2*180)/M_PI;
  
-	if (((fabs(*joint1)) <= MAX_ABS_THETA1_DEG) && (fabs((*joint2)) <= MAX_ABS_THETA2_DEG)){
-	   inRange = 0;
+	if ((fabs(*joint1) >= JOINT1_MAX) || (fabs(*joint2) >= JOINT2_MAX)){
+		*joint1 = 0;
+		*joint2 = 0;
+		printf("SOMETHING WENT VERY WRONG (inverseKinematics function)\n");
 	}
-	return inRange; 
 }
 
 /*|udpate|---------------------------------------------------------------------
@@ -240,7 +267,6 @@ void inverseKinematics(double x, double y, double* joint1, double* joint2, char 
 # variable. If the motors are active, moveRobot is called which calculates the
 # required motor speed based on the desired angle.
 #
-# Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void update(void) {
 	// Update the Encoder Counts
