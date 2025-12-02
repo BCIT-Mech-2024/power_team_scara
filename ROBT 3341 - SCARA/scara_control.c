@@ -78,18 +78,21 @@ void homeRobot(void) {
 #
 # ---------------------------------------------------------------------------*/
 void moveJoint(void) {
-	double joint1, joint2, x, y;
+	double joint1 = 0;
+	double joint2 = 0;
+	double x = 0;
+	double y = 0;
 
 	printf("Please enter the joint angles you would like to move to (theta1,theta2)");
 	scanf("%lf,%lf", &joint1, &joint2);
 
+	forwardKinematics(joint1, joint2, &x, &y);
 	setScaraPosition(
 		joint1*JOINT1_RESOLUTION, 
 		joint2*JOINT2_RESOLUTION, 
 		JOINT1_MAX_SPEED, 
 		JOINT2_MAX_SPEED
 	);
-	forwardKinematics(joint1, joint2, &x, &y);
 
 	printf("Moving to X:%lf , Y:%lf\n", x, y);
 }
