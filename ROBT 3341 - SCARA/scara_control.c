@@ -23,21 +23,11 @@
 # Last Modified: <Today>
 # -----------------------------------------------------------------------------*/
 #include "scara_control.h"
+#include <stdbool.h>
 
 
 /*|Global Variables|-----------------------------------------------------------*/
 extern struct BRobot robot;
-
-/*|scaraMenu|------------------------------------------------------------------
-#	
-# Decription:
-#	This function contains the SCARA menu program.
-#
-# Last Modified: September 30, 2025
-# ---------------------------------------------------------------------------*/
-void scaraMenu(void) {
-
-}
 
 
 /*|displayPosition|------------------------------------------------------------
@@ -145,7 +135,7 @@ void moveTCP(void) {
 # Last Modified: September 30, 2025
 # ---------------------------------------------------------------------------*/
 void limpUnlimp(void) {
-
+//Mine
 }
 
 
