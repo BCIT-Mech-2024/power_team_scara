@@ -1,0 +1,29 @@
+[33mcommit a50731d5012036e5f9354568e83cf88b8657791c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mPeter-IK/FK[m[33m, [m[1;31morigin/Peter-IK/FK[m[33m)[m
+Author: Cheezy-Pizza <peterstogneff@gmail.com>
+Date:   Tue Nov 25 16:00:26 2025 -0800
+
+    IK/FK integration beginning
+
+[33mcommit fd6a083332a712b631bd86db5fe56f2610f3d4f6[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Cheezy-Pizza <peterstogneff@gmail.com>
+Date:   Tue Nov 25 15:10:11 2025 -0800
+
+    I changed nothing :p
+
+[33mcommit 875f864d05090f455aaa0714a1899e7b4dd5faad[m
+Author: Tavin Sanchez <Tonto@MacBook-Pro.local>
+Date:   Tue Nov 25 14:51:36 2025 -0800
+
+    updated IP
+
+[33mcommit 94e98362039ca8341edfb8372b84f79a49b16288[m
+Author: bekreth <bekreth@proton.me>
+Date:   Tue Nov 25 12:21:03 2025 -0800
+
+    Slimmed down
+
+[33mcommit ac6ca3fddad9ab18c3132945915e39a936317a4f[m
+Author: bekreth <bekreth@proton.me>
+Date:   Tue Nov 25 12:19:46 2025 -0800
+
+    init

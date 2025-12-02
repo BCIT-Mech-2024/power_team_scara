@@ -28,7 +28,6 @@
 /*|Global Variables|-----------------------------------------------------------*/
 extern struct BRobot robot;
 
-
 /*|scaraMenu|------------------------------------------------------------------
 #
 # Decription:
@@ -86,12 +85,20 @@ void homeRobot(void) {
 /*|moveJoint|------------------------------------------------------------------
 #
 # Decription:
-#	This function prompts the user for a Joint 1 and Joint 2 position.
+#	This function prompts the user for a Joint 1 and Joint 2 position, then moves there
 #
-# Last Modified: September 30, 2025
+# Last Modified: Dec 02, 2025 - Peter
 # ---------------------------------------------------------------------------*/
 void moveJoint(void) {
+	double joint1, joint2, x, y;
 
+	printf("Please enter the joint angles you would like to move to (theta1,theta2)");
+	scanf("%lf,%lf", &joint1, &joint2);
+
+	setScaraPosition(joint1*JOINT1_RESOLUTION, joint2*JOINT1_RESOLUTION, m0Speed, m1Speed);
+	forwardKinematics(joint1, joint2, &x, &y);
+
+	printf("Moving to X:%lf , Y:%lf\n", x, y);
 }
 
 
@@ -101,10 +108,20 @@ void moveJoint(void) {
 #	This function prompts the user for a specific x,y coordinate and left or 
 # right arm configuration.
 #
-# Last Modified: September 30, 2025
+# Last Modified: Dec 02, 2025 - Peter
 # ---------------------------------------------------------------------------*/
 void moveTCP(void) {
+	double joint1, joint2, x, y;
+	char armSol;
 
+	printf("Please enter the joint angles you would like to move to (X,Y,armSolution)"
+		   "(0 or 1 for arm solution, being left or right)");
+	scanf("%lf,%lf, %c", &x, &y, &armSol);
+
+	inverseKinematics(x, y, &joint1, &joint2, armSol);
+	setScaraPosition(joint1*JOINT1_RESOLUTION, joint2*JOINT1_RESOLUTION, m0Speed, m1Speed);
+
+	printf("Moving to X:%lf , Y:%lf\n", x, y);
 }
 
 
@@ -153,7 +170,7 @@ void moveRobot(void) {
 #	x - x-coordinate in inches.
 #	y - y-coordiante in inches.
 #
-# Last Modified: September 30, 2025
+# Last Modified: Dec 02, 2025 - Peter
 # ---------------------------------------------------------------------------*/
 void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 	double joint1_Radians = (joint1*180)/M_PI;
@@ -165,7 +182,7 @@ void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 	else{
 		*x = 0;
 		*y = 0;
-		printf("SOMETHING WENT VERY WRONG (forwardKinematics function)");
+		printf("SOMETHING WENT VERY WRONG (forwardKinematics function)\n");
 	}
 }
 
@@ -184,10 +201,10 @@ void forwardKinematics(double joint1, double joint2, double* x, double* y) {
 #	joint1 - Joint 1 angle in degrees.
 #	joint2 - Joint 2 angle in degrees.
 #
-# Last Modified: September 30, 2025
+# Last Modified: Dec 02, 2025 - Peter
 # ---------------------------------------------------------------------------*/
 void inverseKinematics(double x, double y, double* joint1, double* joint2, char arm) {
-	int inRange = -1;
+	//int inRange = -1;
  
 	double L = sqrt((x*x) + (y*y));
 	double beta = atan2(y,x);
@@ -216,18 +233,22 @@ void inverseKinematics(double x, double y, double* joint1, double* joint2, char 
 		*joint2+= 2*M_PI;
 	 }
 	 else if (*joint2 > M_PI){
-		*joint2-= 2*PI;
+		*joint2-= 2*M_PI;
 	 }
 
 	*joint1 = (*joint1*180)/M_PI;
-	*joint2 = (*joint2*180)/PI;
+	*joint2 = (*joint2*180)/M_PI;
 	//test command
 	//printf("/%lf,%lf/\n", fabs(*joint1), fabs(*joint2));
  
-	if (((fabs(*joint1)) <= MAX_ABS_THETA1_DEG) && (fabs((*joint2)) <= MAX_ABS_THETA2_DEG)){
-	   inRange = 0;
+	if (((fabs(*joint1)) <= JOINT1_MAX) && (fabs((*joint2)) <= JOINT2_MAX)){
+	   //inRange = 0;
 	}
-	return inRange; 
+	else{
+		*joint1 = 0;
+		*joint2 = 0;
+		printf("SOMETHING WENT VERY WRONG (inverseKinematics function)\n");
+	}
 }
 
 /*|udpate|---------------------------------------------------------------------

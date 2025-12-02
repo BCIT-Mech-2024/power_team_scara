@@ -4,7 +4,7 @@
 # Program: scara_control.h
 #
 # Description:
-#	This program contains <Your Names>'s solution to ROBT 3341 - SCARA.
+#	This program contains Peter, Chris & Tavin's solution to ROBT 3341 - SCARA.
 #
 # Week 1 Tasks:
 #	1. define constants
@@ -19,9 +19,16 @@
 #	4. homeRobot
 #	5. moveJoint + moveTCP only using setScaraSpeed
 #
-# Author: <Your Names>
-# Last Modified: <Today>
+# Authors: Peter, Tavin, Chris
+# Last Modified: December 02, 2025
 # -----------------------------------------------------------------------------*/
+
+/*|HOW TO TEST THIS PROGAM|------------------------------------------------------
+# 1: run & debug to make sure program runs
+# 2: 
+# -----------------------------------------------------------------------------*/
+
+
 #ifndef SCARA_CONTROL_H_
 #define SCARA_CONTROL_H_
 
@@ -45,6 +52,7 @@
 
 #define JOINT1_MAX			95				// Degrees (from Horizontal)
 #define JOINT2_MAX			150				// Degrees (from Joint 1)
+
 
 
 /*|Enumerations|---------------------------------------------------------------*/
