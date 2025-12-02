@@ -111,8 +111,6 @@ void moveTCP(void) {
 void limpUnlimp(void) {
 
 	int limp = 0;
-	int J1 = 0;
-	int J2 = 0;
 
 	printf("Enter a 1 to put the Scara into Limp Mode. Or any other key to proceed: \n");
 	scanf("%d" &limp);
