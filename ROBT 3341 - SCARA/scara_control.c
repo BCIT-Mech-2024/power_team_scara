@@ -107,13 +107,13 @@ void moveTCP(void) {
 	double joint2 = 0;
 	double x = 0;
 	double y = 0;
-	char armSol = 0;
+	char armSolution = 0;
 
 	printf("Please enter the joint angles you would like to move to (X,Y,armSolution)\
-		   (0 or 1 for arm solution, being left or right)");
-	scanf("%lf,%lf, %c", &x, &y, &armSol);
+		   \n(0 or 1 for arm solution, being left or right)");
+	scanf("%lf,%lf, %c", &x, &y, &armSolution);
 
-	inverseKinematics(x, y, &joint1, &joint2, armSol);
+	inverseKinematics(x, y, &joint1, &joint2, armSolution);
 	setScaraPosition(
 		joint1*JOINT1_RESOLUTION, 
 		joint2*JOINT2_RESOLUTION, 
@@ -235,8 +235,6 @@ void inverseKinematics(double x, double y, double* joint1, double* joint2, char 
 
 	*joint1 = (*joint1*180)/M_PI;
 	*joint2 = (*joint2*180)/M_PI;
-	//test command
-	//printf("/%lf,%lf/\n", fabs(*joint1), fabs(*joint2));
  
 	if ((fabs(*joint1) >= JOINT1_MAX) || (fabs(*joint2) >= JOINT2_MAX)){
 		*joint1 = 0;
