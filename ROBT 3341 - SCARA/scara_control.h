@@ -53,6 +53,8 @@
 #define JOINT1_MAX			95				// Degrees (from Horizontal)
 #define JOINT2_MAX			150				// Degrees (from Joint 1)
 
+#define JOINT1_MAX_SPEED 	800				// pulses/sec
+#define JOINT2_MAX_SPEED 	800				// pulses/sec
 
 
 /*|Enumerations|---------------------------------------------------------------*/

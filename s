@@ -1,4 +1,10 @@
-[33mcommit a50731d5012036e5f9354568e83cf88b8657791c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mPeter-IK/FK[m[33m, [m[1;31morigin/Peter-IK/FK[m[33m)[m
+[33mcommit fb4072c01ff57c3e029e589a67f062cf2f5643e7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mPeter-IK/FK[m[33m)[m
+Author: Cheezy-Pizza <peterstogneff@gmail.com>
+Date:   Tue Dec 2 13:26:12 2025 -0800
+
+    finished IK/FK, added the moveTCP & move Joint, but with placeholder motor speed values
+
+[33mcommit a50731d5012036e5f9354568e83cf88b8657791c[m[33m ([m[1;31morigin/Peter-IK/FK[m[33m)[m
 Author: Cheezy-Pizza <peterstogneff@gmail.com>
 Date:   Tue Nov 25 16:00:26 2025 -0800
 
