@@ -45,18 +45,6 @@ void main(void){
 	powerDownScara();
 }
 
-/******************************************************************************
-* Function: scaraTestProcedure
-* 
-*	This function will validate the operation of the following functions:
-*	- findScaraIndex
-*	- setScaraPosition
-*	- defineScaraPosition
-*	- setScaraSpeed
-*	- getScaraEncoderCount
-* 
-* Last Modified: September 08, 2025 by Isaiah Regacho
-******************************************************************************/
 void scaraTestProcedure(void) {
 	// Move to Index
 	printf("\nSearching for indexes...\n");
