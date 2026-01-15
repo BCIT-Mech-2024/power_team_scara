@@ -26,6 +26,7 @@
 #include "scara_control.h"
 #include "scara_menu.h"
 #include "tic_generator.h"
+#include <string.h>
 
 
 /*|Global Variables|-----------------------------------------------------------*/
