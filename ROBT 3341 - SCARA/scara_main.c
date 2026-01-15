@@ -1,25 +1,3 @@
-/*|SCARA Controller|-----------------------------------------------------------
-#
-# Project: ROBT 3341 - SCARA Control
-# Program: scara_main.c
-#
-# Description:
-#	This program controls the SCARA Robot which was a repurposed CRS 5-DoF
-# Robot arm. By default, the program should connect to the SCARA.
-#
-# This program contains code developed by Bryn Rissling and modified by
-# Isaiah Regacho.
-#
-# Author: <Your Name>
-# Date Created: March 22, 2025 by Bryn Rissling
-#
-# History:
-#	v2025-03-22 (BR): Created for ROBT 4491
-#	v2025-06-17 (IR): Modified for ROBT 3341
-#
-# Last Modified: <Today>
-# -----------------------------------------------------------------------------*/
-
 /*|Includes|-------------------------------------------------------------------*/
 #include <stdio.h>
 #include "scara_interface.h"
@@ -37,7 +15,6 @@ void scaraTestProcedure(void);
 
 
 void main(void){
-	// Customize Output
 	// Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 	// Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
 	// Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
@@ -47,18 +24,6 @@ void main(void){
 
 	robot.limp = 1;
 	robot.motorsActive = 1;
-
-	// Initializes SCARA Connection
-	// 
-	// Using Ethernet:
-	//		Use GalilTools to find the assigned address of the SCARA.
-	//		Update the initialization function call to "initializeSCARA("NEW IP ADDRESS").
-	// 
-	// Alternative Connection USB:
-	//		Go to Device Manager > Ports (COM & LPT)
-	//		Look for a device call "USB Serial Port".
-	//		Changed the initialization function call from "initializeSCARA("142.232.112.183")" to
-	//		"initializeSCARA("COM4")"
 	if (!initializeSCARA("141.232.112.209")) {
 		exit(0);
 	}
